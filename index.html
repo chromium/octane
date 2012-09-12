@@ -43,6 +43,7 @@
   }
 
   function AddResult(name, result) {
+    console.log(name + ': ' + result);
     var box = document.getElementById("Result-" + name);
     box.innerHTML = result;
   }
@@ -101,6 +102,8 @@
       console.log("Typed Arrays not supported");
       document.getElementById("warning-header").innerHTML = "Typed Arrays partly or not supported - some tests will be skipped";
     }
+    if (window.document.URL.indexOf('auto=1') >= 0)
+      Run();
   }
 
   function Load() {
