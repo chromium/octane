@@ -100,7 +100,7 @@
 
     if (!hasTypedArrays) {
       console.log("Typed Arrays not supported");
-      document.getElementById("warning-header").innerHTML = "Typed Arrays partly or not supported - some tests will be skipped";
+      document.getElementById("alertbox").style.display="block";
     }
     if (window.document.URL.indexOf('auto=1') >= 0)
       Run();
@@ -156,13 +156,14 @@ body {
   </div>
 
   <div class="container">
+    <div class="alert" style="display:none" id="alertbox">
+       <strong>Warning</strong> This JavaScript engine does not support Typed Arrays. You might want to run the <a href="http://v8.googlecode.com/svn/data/benchmarks/v7/run.html">V8 benchmark v7</a> instead.
+    </div>
     <div id="main-container">
     <a id="run-octane" href="javascript:Run()">
       <div class="hero-unit" id="inside-anchor">
         <h1 align="center" id="main-banner">Start Octane</h1>
         <div id="bar-appendix"></div>
-        <!-- here space for warning messages -->
-        <div class="warning-header" id="warning-header" align="center"></div>
       </div>
     </a>
     </div>
