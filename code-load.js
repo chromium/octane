@@ -1,4 +1,4 @@
-// Copyright 2012 the Octane Benchmark project authors. All rights reserved.
+// Copyright 2013 the Octane Benchmark project authors. All rights reserved.
 // Redistribution and use in source and binary forms, with or without
 // modification, are permitted provided that the following conditions are
 // met:
@@ -65,16 +65,22 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 
-var CodeLoad = new BenchmarkSuite('CodeLoad', 450000, [
+var CodeLoad = new BenchmarkSuite('CodeLoad', [450000], [
   new Benchmark('CodeLoadClosure',
+                false,
+                false,
                 runCodeLoadClosure,
                 setupCodeLoad,
                 tearDownCodeLoad,
+                null,
                 16),
   new Benchmark('CodeLoadJQuery',
+                false,
+                false,
                 runCodeLoadJQuery,
                 setupCodeLoad,
                 tearDownCodeLoad,
+                null,
                 16)
 ]);
 
@@ -1485,11 +1491,24 @@ l:k}f(a).css(c,h)},c,a,arguments.length,null)}}),a.jQuery=a.$=f,typeof define==\
 \"function\"&&define.amd&&define.amd.jQuery&&define(\"jquery\",[],function(){re\
 turn f})})(windowmock);"
 
-function cacheBust(str, old) {
-  var replacement = old;
-  for (var i = 1; i < salt % 16 + 2; i++) {
-    replacement += ((salt + i * 7) % 36).toString(36);
+// Jenkins hash function.
+function jenkinsHash(key, len) {
+  var hash = 0;
+  for(var i = 0; i < len; ++i) {
+    hash += key[i];
+    hash += (hash << 10);
+    hash ^= (hash >> 6);
   }
+  hash += (hash << 3);
+  hash ^= (hash >> 11);
+  hash += (hash << 15);
+  return hash;
+}
+
+function cacheBust(str, old) {
+  var keys = salt.toString().split('').map(parseFloat);
+  var hash = Math.abs(jenkinsHash(keys, keys.length));
+  var replacement = old + hash.toString(36);
   return str.replace(new RegExp(old, "g"), replacement);
 }
 

@@ -23,8 +23,8 @@
 // more like a JavaScript program.
 
 
-var DeltaBlue = new BenchmarkSuite('DeltaBlue', 66118, [
-  new Benchmark('DeltaBlue', deltaBlue)
+var DeltaBlue = new BenchmarkSuite('DeltaBlue', [66118], [
+  new Benchmark('DeltaBlue', true, false, deltaBlue)
 ]);
 
 

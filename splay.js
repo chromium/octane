@@ -33,8 +33,9 @@
 // also has to deal with a lot of changes to the large tree object
 // graph.
 
-var Splay = new BenchmarkSuite('Splay', 81491, [
-  new Benchmark("Splay", SplayRun, SplaySetup, SplayTearDown)
+var Splay = new BenchmarkSuite('Splay', [81491, 2739514], [
+  new Benchmark("Splay", true, false, 
+    SplayRun, SplaySetup, SplayTearDown, SplayRMS)
 ]);
 
 
@@ -44,7 +45,7 @@ var kSplayTreeModifications = 80;
 var kSplayTreePayloadDepth = 5;
 
 var splayTree = null;
-
+var splaySampleTimeStart = 0.0;
 
 function GeneratePayloadTree(depth, tag) {
   if (depth == 0) {
@@ -67,6 +68,19 @@ function GenerateKey() {
   return Math.random();
 }
 
+var splaySamples = 0;
+var splaySumOfSquaredPauses = 0;
+
+function SplayRMS() {
+  return Math.round(Math.sqrt(splaySumOfSquaredPauses / splaySamples) * 10000);
+}
+
+function SplayUpdateStats(time) {
+  var pause = time - splaySampleTimeStart;
+  splaySampleTimeStart = time;
+  splaySamples++;
+  splaySumOfSquaredPauses += pause * pause;
+}
 
 function InsertNewNode() {
   // Insert new node with a unique key.
@@ -80,10 +94,21 @@ function InsertNewNode() {
 }
 
 
-
 function SplaySetup() {
+  // Check if the platform has the performance.now high resolution timer.
+  // If not, throw exception and quit.
+  if (!performance.now) {
+    throw "PerformanceNowUnsupported";
+  }
+
   splayTree = new SplayTree();
-  for (var i = 0; i < kSplayTreeSize; i++) InsertNewNode();
+  splaySampleTimeStart = performance.now()
+  for (var i = 0; i < kSplayTreeSize; i++) {
+    InsertNewNode();
+    if ((i+1) % 20 == 19) {
+      SplayUpdateStats(performance.now());
+    }
+  }
 }
 
 
@@ -93,6 +118,9 @@ function SplayTearDown() {
   // tear down function.
   var keys = splayTree.exportKeys();
   splayTree = null;
+
+  splaySamples = 0;
+  splaySumOfSquaredPauses = 0;
 
   // Verify that the splay tree has the right size.
   var length = keys.length;
@@ -117,6 +145,7 @@ function SplayRun() {
     if (greatest == null) splayTree.remove(key);
     else splayTree.remove(greatest.key);
   }
+  SplayUpdateStats(performance.now());
 }
 
 

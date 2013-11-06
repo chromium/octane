@@ -1,5 +1,5 @@
 /**
- * Copyright 2012 the V8 project authors. All rights reserved.
+ * Copyright 2013 the V8 project authors. All rights reserved.
  * Copyright 2009 Oliver Hunt <http://nerget.com>
  *
  * Permission is hereby granted, free of charge, to any person
@@ -22,13 +22,18 @@
  * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
  * OTHER DEALINGS IN THE SOFTWARE.
+ *
+ * Update 10/21/2013: fixed loop variables at line 119
  */
 
-var NavierStokes = new BenchmarkSuite('NavierStokes', 1484000,
+var NavierStokes = new BenchmarkSuite('NavierStokes', [1484000],
                                       [new Benchmark('NavierStokes',
+                                                     true,
+                                                     false,
                                                      runNavierStokes,
                                                      setupNavierStokes,
                                                      tearDownNavierStokes,
+                                                     null,
                                                      16)]);
 
 var solver = null;
@@ -50,8 +55,8 @@ function checkResult(dens) {
         this.result+=~~((dens[i]*10));
     }
 
-    if (this.result!=74) {
-        alert("checksum failed: " + this.result);
+    if (this.result!=77) {
+        throw(new Error("checksum failed"));
     }
 }
 
@@ -111,7 +116,7 @@ function FluidField(canvas) {
                 x[i + (height+1) *rowSize] = x[i + height * rowSize];
             }
 
-            for (var j = 1; i <= height; i++) {
+            for (var j = 1; j <= height; j++) {
                 x[j * rowSize] = -x[1 + j * rowSize];
                 x[(width + 1) + j * rowSize] = -x[width + j * rowSize];
             }

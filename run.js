@@ -26,20 +26,27 @@
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 
-load('base.js');
-load('richards.js');
-load('deltablue.js');
-load('crypto.js');
-load('raytrace.js');
-load('earley-boyer.js');
-load('regexp.js');
-load('splay.js');
-load('navier-stokes.js');
-load('pdfjs.js');
-load('mandreel.js');
-load('gbemu.js');
-load('code-load.js');
-load('box2d.js');
+var base_dir = '';
+load(base_dir + 'base.js');
+load(base_dir + 'richards.js');
+load(base_dir + 'deltablue.js');
+load(base_dir + 'crypto.js');
+load(base_dir + 'raytrace.js');
+load(base_dir + 'earley-boyer.js');
+load(base_dir + 'regexp.js');
+load(base_dir + 'splay.js');
+load(base_dir + 'navier-stokes.js');
+load(base_dir + 'pdfjs.js');
+load(base_dir + 'mandreel.js');
+load(base_dir + 'gbemu-part1.js');
+load(base_dir + 'gbemu-part2.js');
+load(base_dir + 'code-load.js');
+load(base_dir + 'box2d.js');
+load(base_dir + 'zlib.js');
+load(base_dir + 'zlib-data.js');
+load(base_dir + 'typescript.js');
+load(base_dir + 'typescript-input.js');
+load(base_dir + 'typescript-compiler.js');
 
 var success = true;
 

@@ -26,8 +26,9 @@
 var pdf_file = "test.pdf";
 var canvas_logs = [];
 
-var PdfJS = new BenchmarkSuite("PdfJS", 9000000, [
-  new Benchmark("PdfJS", runPdfJS, setupPdfJS, tearDownPdfJS, 4)
+var PdfJS = new BenchmarkSuite("PdfJS", [10124921], [
+  new Benchmark("PdfJS", false, false, 
+    runPdfJS, setupPdfJS, tearDownPdfJS, null, 4)
 ]);
 
 function setupPdfJS() {
@@ -29691,9 +29692,6 @@ var WorkerMessageHandler = {
         });
         return;
       }
-
-      PdfJS_window.console.log('page=%d - getOperatorList: time=%dms, len=%d', pageNum,
-                              Date.now() - start, operatorList.fnArray.length);
 
       // Filter the dependecies for fonts.
       var fonts = {};
