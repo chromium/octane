@@ -29,6 +29,7 @@ var typescript = new BenchmarkSuite('Typescript', [255011322], [
   new Benchmark("Typescript",
                 false,
                 true,
+                5,
                 runTypescript,
                 setupTypescript,
                 tearDownTypescript,

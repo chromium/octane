@@ -26,7 +26,7 @@
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 new BenchmarkSuite('zlib', [152815148], [
-  new Benchmark('zlib', false, true, 
+  new Benchmark('zlib', false, true, 10,
     runZlib, undefined, tearDownZlib, null, 3)]);
 
 // Generate 100kB pseudo-random bytes (compressed 25906 bytes) and

@@ -2,8 +2,8 @@
 // benchmark harness code at the beginning and end of the file.
 
 var EarleyBoyer = new BenchmarkSuite('EarleyBoyer', [666463], [
-  new Benchmark("Earley", true,  false, function () { BgL_earleyzd2benchmarkzd2(); }),
-  new Benchmark("Boyer", true, false, function () { BgL_nboyerzd2benchmarkzd2(); })
+  new Benchmark("Earley", true,  false, 2500, function () { BgL_earleyzd2benchmarkzd2(); }),
+  new Benchmark("Boyer", true, false, 200, function () { BgL_nboyerzd2benchmarkzd2(); })
 ]);
 
 

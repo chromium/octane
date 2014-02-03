@@ -24,7 +24,7 @@
 
 
 var DeltaBlue = new BenchmarkSuite('DeltaBlue', [66118], [
-  new Benchmark('DeltaBlue', true, false, deltaBlue)
+  new Benchmark('DeltaBlue', true, false, 4400, deltaBlue)
 ]);
 
 

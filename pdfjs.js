@@ -27,7 +27,7 @@ var pdf_file = "test.pdf";
 var canvas_logs = [];
 
 var PdfJS = new BenchmarkSuite("PdfJS", [10124921], [
-  new Benchmark("PdfJS", false, false, 
+  new Benchmark("PdfJS", false, false, 24,
     runPdfJS, setupPdfJS, tearDownPdfJS, null, 4)
 ]);
 

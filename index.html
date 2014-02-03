@@ -41,6 +41,7 @@
   var benchmarks = BenchmarkSuite.CountBenchmarks();
   var success = true;
   var latencyBenchmarks = ["Splay", "Mandreel"];
+  var skipBenchmarks = [];
 
   function ShowBox(name) {
     var box = document.getElementById("Box-" + name);
@@ -104,7 +105,8 @@
       NotifyError : AddError,
       NotifyResult : AddResult,
       NotifyScore : AddScore
-    });
+    },
+    skipBenchmarks);
   }
 
   function CheckCompatibility() {
@@ -117,6 +119,8 @@
       console.log("Typed Arrays not supported");
       document.getElementById("alertbox").style.display="block";
     }
+    if (window.document.URL.indexOf('skip_zlib=1') >= 0)
+      skipBenchmarks.push("zlib");
     if (window.document.URL.indexOf('auto=1') >= 0)
       Run();
   }

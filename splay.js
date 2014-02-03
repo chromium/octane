@@ -34,7 +34,7 @@
 // graph.
 
 var Splay = new BenchmarkSuite('Splay', [81491, 2739514], [
-  new Benchmark("Splay", true, false, 
+  new Benchmark("Splay", true, false, 1400,
     SplayRun, SplaySetup, SplayTearDown, SplayRMS)
 ]);
 
