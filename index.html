@@ -41,7 +41,8 @@
   var benchmarks = BenchmarkSuite.CountBenchmarks();
   var success = true;
   var latencyBenchmarks = ["Splay", "Mandreel"];
-  var skipBenchmarks = [];
+  var skipBenchmarks =
+          typeof skipBenchmarks === "undefined" ? [] : skipBenchmarks;
 
   function ShowBox(name) {
     var box = document.getElementById("Box-" + name);

@@ -138,6 +138,7 @@ BenchmarkSuite.ResetRNG = function() {
 // context of browsers. Once done, the final score is reported to the
 // runner.
 BenchmarkSuite.RunSuites = function(runner, skipBenchmarks) {
+  skipBenchmarks = typeof skipBenchmarks === 'undefined' ? [] : skipBenchmarks;
   var continuation = null;
   var suites = BenchmarkSuite.suites;
   var length = suites.length;
